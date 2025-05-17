@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checklist Vehicular 📝</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      font-size: 12px;
+      background: #40e0d0 url('https://www.dropbox.com/scl/fi/2vf8jzzlh7xq3h07ftu4l/v602-nunoon-05-rippednotes.jpg?rlkey=yr74qjf6dfcbvs1war1lsl3q3&dl=1') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+    #logo {
+      width: 200px; height: 200px;
+      margin-top: 15px;
+      background: url('https://www.dropbox.com/scl/fi/0vwf6mmktfhsxblaicpno/panchos-logo.png?rlkey=io7zuzq7z3m3ptkj1hzmi3go&dl=1') no-repeat center center;
+      background-size: contain;
+    }
+    form {
+      background: rgba(255 255 255 / 0.85);
+      padding: 20px;
+      border-radius: 20px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      margin: 25px 0 50px 0;
+    }
+    h2 {
+      text-align: center;
+      margin: 20px 0 10px;
+      color: #006666;
+      font-weight: 600;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .section {
+      margin-bottom: 25px;
+      border: 2px solid #40e0d0;
+      border-radius: 15px;
+      padding: 15px;
+    }
+    .item-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .item-label {
+      flex: 1 0 200px;
+      font-weight: 600;
+      font-size: 13px;
+      user-select: none;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+    }
+    button {
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 8px 22px;
+      color: white;
+      transition: transform 0.15s ease;
+      user-select: none;
+      min-width: 70px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    button.bueno {
+      background-color: #28a745;
+    }
+    button.malo {
+      background-color: #dc3545;
+    }
+    input[type="text"], input[type="number"], input[type="time"], input[type="date"], select, textarea {
+      border-radius: 12px;
+      border: 1.5px solid #40e0d0;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-family: 'Poppins', Arial, sans-serif;
+      resize: vertical;
+      flex: 1 1 250px;
+      max-width: 300px;
+    }
+    textarea {
+      height: 30px;
+      font-size: 12px;
+    }
+    input[type="file"] {
+      margin-top: 5px;
+      border-radius: 12px;
+    }
+    label {
+      font-weight: 600;
+      user-select: none;
+    }
+    #submit-btn {
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      padding: 12px 30px;
+      border-radius: 30px;
+      width: 100%;
+      max-width: 400px;
+      margin: 20px auto 0;
+      display: block;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,123,255,0.5);
+      transition: background-color 0.3s ease;
+    }
+    #submit-btn:hover {
+      background-color: #0056b3;
+    }
+    .date-time {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .flex-center {
+      display: flex;
+      justify-content: center;
+    }
+    .observacion-textarea {
+      max-width: 350px;
+      font-size: 12px;
+      border-radius: 15px;
+      border: 1.5px solid #40e0d0;
+      padding: 4px 8px;
+      resize: vertical;
+    }
+    /* Radio button group as buttons */
+    input[type="radio"] {
+      display: none;
+    }
+    input[type="radio"]:checked + label {
+      box-shadow: 0 0 0 3px #40e0d0 inset;
+    }
+  </style>
+</head>
+<body>
+  <div id="logo" aria-label="Logo de la empresa"></div>
+
+  <form id="checklistForm" onsubmit="return enviarFormulario(event)" autocomplete="off" novalidate>
+    <div class="date-time">
+      <div>📅 Fecha: <input type="date" id="fecha" name="fecha" readonly></div>
+      <div>⏰ Hora: <input type="time" id="hora" name="hora" readonly></div>
+    </div>
+
+    <div class="item-row" style="justify-content:center; gap:20px; margin-bottom:20px;">
+      <label for="tipoVehiculo">🚗 Tipo de Vehículo:</label>
+      <select name="tipoVehiculo" id="tipoVehiculo" required>
+        <option value="" disabled selected>Selecciona vehículo</option>
+        <option value="Van">Van</option>
+        <option value="Tornado">Tornado</option>
+        <option value="Avanza">Avanza</option>
+        <option value="Nissan">Nissan</option>
+        <option value="Isuzu">Isuzu</option>
+      </select>
+
+      <label for="placa">📋 Placa:</label>
+      <input type="text" id="placa" name="placa" readonly style="max-width:130px;" />
+    </div>
+
+    <div class="item-row" style="justify-content:center; gap:20px; margin-bottom:20px;">
+      <label for="kilometraje">🛣️ Kilometraje:</label>
+      <input type="number" id="kilometraje" name="kilometraje" min="0" required />
+
+      <label for="nombreConductor">👤 Nombre del Conductor:</label>
+      <input type="text" id="nombreConductor" name="nombreConductor" required style="max-width:250px;" />
+
+      <label for="puesto">💼 Puesto:</label>
+      <input type="text" id="puesto" name="puesto" required style="max-width:200px;" />
+    </div>
+
+    <!-- Sección Luces -->
+    <section class="section" aria-label="Sección de luces">
+      <h2>💡 Luces</h2>
+      <div class="item-row">
+        <span class="item-label">Luz Baja</span>
+        <div class="btn-group" role="radiogroup" aria-labelledby="luzBaja-label">
+          <input type="radio" id="luzBajaBueno" name="luzBaja" value="Bueno" required />
+          <label for="luzBajaBueno" class="bueno">Bueno</label>
+          <input type="radio" id="luzBajaMalo" name="luzBaja" value="Malo" />
+          <label for="luzBajaMalo" class="malo">Malo</label>
+        </div>
+        <textarea placeholder="Observaciones..." name="observacionLuzBaja" class="observacion-textarea"></textarea>
+      </div>
+      <div class="item-row">
+        <span class="item-label">Luz Reversa</span>
+        <div class="btn-group" role="radiogroup">
+          <input type="radio" id="luzReversaBueno" name="luzReversa" value="Bueno" required />
+          <label for="luzReversaBueno" class="bueno">Bueno</label>
+          <input type="radio" id="luzReversaMalo" name="luzReversa" value="Malo" />
+          <label for="luzReversaMalo" class="malo">Malo</label>
+        </div>
+        <textarea placeholder="Observaciones..." name="observacionLuzReversa" class="observacion-textarea"></textarea>
+      </div>
+      <div class="item-row">
+        <span class="item-label">Luz Freno</span>
+        <div class="btn-group" role="radiogroup">
+          <input type="radio" id="luzFrenoBueno" name="luzFreno" value="Bueno" required />
+          <label for="luzFrenoBueno" class="bueno">Bueno</label>
+          <input type="radio" id="luzFrenoMalo" name="luzFreno" value="Malo" />
+          <label for="luzFrenoMalo" class="malo">Malo</label>
+        </div>
+        <textarea placeholder="Observaciones..." name="observacionLuzFreno" class="observacion-textarea"></textarea>
+      </div>
+      <div class="item-row">
+        <span class="item-label">Intermitentes</span>
+        <div class="btn-group" role="radiogroup">
+          <input type="radio" id="intermitentesBueno" name="intermitentes" value="Bueno" required />
+          <label for="intermitentesBueno" class="bueno">Bueno</label>
+          <input type="radio" id="intermitentesMalo" name="intermitentes" value="Malo" />
+          <label for="intermitentesMalo" class="malo">Malo</label>
+        </div>
+        <textarea placeholder="Observaciones..." name="observacionIntermitentes" class="observacion-textarea"></textarea>
+      </div>
+      <div class="item-row">
+        <span class="item-label">Luces Traseras</span>
+        <div class="btn-group" role="radiogroup">
+          <input type="radio" id="lucesTraserasBueno" name="lucesTraseras" value="Bueno" required />
+          <label for="lucesTraserasBueno" class="bueno">Bueno</label>
+          <input type="radio" id="lucesTraserasMalo" name="lucesTraseras" value="Malo" />
+          <label for="lucesTraserasMalo" class="malo">Malo</label>
+        </div>
+        <textarea placeholder="Observaciones..." name="observacionLucesTraseras" class="observacion-textarea"></textarea>
+      </div>
+    </section>
+
+    <!-- Sección Accesorios -->
+    <section class="section" aria-label="Sección de accesorios">
+      <h2>🧰 Accesorios</h2>
+      <div class="item-row">
+        <span class="item-label">Extintor</span>
+        <div class="btn-group" role="radiogroup">
+          <input type="radio" id="extintorBueno" name="extintor" value="Bueno" required />
+          <label for="extintorBueno" class="bueno">Bueno</label>
+          <input type="radio" id="extintorMalo" name="extintor" value="Malo" />
+          <label for="extintorMalo" class="malo">Malo</label>
+        </div>
+        <textarea placeholder="Observaciones..." name="observacionExtintor" class="observacion-textarea"></textarea>
+      </div>
+      <div class="item-row">
+        <span class="item-label">Triángulos</span>
+        <div class="btn-group" role="radiogroup">
+          <input type="radio" id="triangulosBueno" name="triangulos" value="Bueno" required />
+          <label for="triangulosBueno" class="bueno">Bueno</label>
+          <input type="radio" id="triangulosMalo" name="triangulos" value="Malo" />
+          <label for="triangulosMalo" class="malo">Malo</label>
+        </div>
+        <textarea placeholder="Observaciones..." name="observacion
